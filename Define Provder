@@ -1,6 +1,0 @@
-[ansible@dc1netansible playbooks]$ cat secret.yml
----
-creds:
-  username: wordgoeshere
-  password: 'password'
-  auth_pass: 'samepassword'
