@@ -1,0 +1,58 @@
+---
+- hosts: Romania-switches
+  gather_facts: no
+  connection: local
+
+  tasks:
+  - name: OBTAIN LOGIN CREDENTIALS
+    include_vars: secret.yml
+
+  - name: DEFINE PROVIDER
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "{{ creds['username'] }}"
+        password: "{{ creds['password'] }}"
+        auth_pass: "{{ creds['auth_pass'] }}"
+
+  - name: Configure the login banner
+    ios_banner:
+      provider: "{{ provider }}"
+      banner: login
+      text: |
+        ******************************************************************************
+        ** The information contained in this system is confidential and proprietary **
+        ** and is available only for approved business purpose. This system and any **
+        ** related information is not to be used for any purpose that is unlawful   **
+        ** or prohibited by any policy instituted by Tangoe, Inc. Access to this    **
+        ** system is limited to those individuals with a need to know the           **
+        ** information contained herein. Tangoe, Inc. will monitor all uses of      **
+        ** information and systems as applicable by law. NO INFORMATION FROM THIS   **
+        ** SYSTEM MAY BE COPIED OR PROVIDED TO ANY PARTY WITHOUT PRIOR              **
+        ** AUTHORIZATION FROM THE COMPANY. Your use of this system constitutes your **
+        ** agreement and acceptance of these terms.                                 **
+        **                                                                          **
+        ******************************************************************************
+      state: present
+  
+  - name: configure the exec banner
+    ios_banner:
+      provider: "{{ provider }}"
+      banner: motd
+      text: |
+        *******************************************************************************
+                                          WARNING:                                     
+                 THIS SYSTEM IS PRIVATE PROPERTY FOR THE USE OF TANGOE, INC.       
+                               **** AUTHORIZED USERS ONLY! ****                        
+        Any use of this computer network system shall be deemed to be express consent  
+        to monitoring of such use and to such additional monitoring as may be necessary
+        to identify any unauthorized user. The system administrator or other           
+        representatives of the system owner may monitor system use at any time without 
+        further notice or consent. Unauthorized use of this system and any other       
+        criminal conduct revealed by such use is subject to disclosure to law          
+        enforcement officials and prosecution to the full extent of the law.           
+        Unauthorized access is a violation of state and federal, civil and criminal    
+        laws.                                                                          
+        *******************************************************************************
+      state: present 
+[ansible@dc1netansible playbooks]$ 
