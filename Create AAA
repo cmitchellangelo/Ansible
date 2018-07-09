@@ -27,7 +27,7 @@
        provider: "{{ provider }}"
        authorize: yes
        lines:
-         - server-private x.x.x.x timeout 30 retransmit 1 key as;dlskdfjl
+         - server-private x.x.x.x timeout 30 retransmit 1 key xxxxxxxxxxx
          - ip radius source-interface Vlan254
        parents: ['aaa group server radius xxxxxxx']
        before: ['no aaa group server radius xxxxxxxx']
