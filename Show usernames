@@ -1,0 +1,1 @@
+[root@dc1netansible ~]# ansible all -m raw -a "show run" -u chase.mitchell -k | grep 'SUCCESS\|username'
