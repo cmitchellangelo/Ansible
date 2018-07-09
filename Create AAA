@@ -1,0 +1,49 @@
+---
+- hosts: Romania-switches
+  gather_facts: no
+  connection: local
+
+  tasks:
+  - name: OBTAIN LOGIN CREDENTIALS
+    include_vars: secret.yml
+
+  - name: DEFINE PROVIDER
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "{{ creds['username'] }}"
+        password: "{{ creds['password'] }}"
+        auth_pass: "{{ creds['auth_pass'] }}"
+
+  - name: Turn on aaa new-model
+    ios_config:
+       provider: "{{ provider }}"
+       authorize: yes
+       lines:
+        - aaa new-model
+
+  - name: Add radius sever
+    ios_config:
+       provider: "{{ provider }}"
+       authorize: yes
+       lines:
+         - server-private x.x.x.x timeout 30 retransmit 1 key as;dlskdfjl
+         - ip radius source-interface Vlan254
+       parents: ['aaa group server radius xxxxxxx']
+       before: ['no aaa group server radius xxxxxxxx']
+       match: exact
+
+  - name: Add authentications methods
+    ios_config:
+       provider: "{{ provider }}"
+       authorize: yes
+       lines:
+        - aaa authentication login default group xxxx local
+        - aaa authentication login CONSOLE local
+        - aaa authorization exec default group xxxxx local 
+        - aaa authorization exec CONSOLE local 
+        - aaa accounting send stop-record authentication failure
+        - aaa accounting update periodic 1
+        - aaa accounting network default start-stop group xxxxxxx
+
+[ansible@dc1netansible playbooks]$ 
