@@ -1,0 +1,17 @@
+[ansible@dc1netansible playbooks]$ cat snmp.yml
+---
+- connection: local
+  gather_facts: false
+  host: aus2-testswitches
+ 
+  task: 
+  - 
+     ios_config: 
+       commands: 
+         - "snmp-server community xxxxxxx RO"
+         - "snmp-server community xxxxxxx RO"
+         - "snmp-server location CITYCITYCITY"
+         - "snmp-server contact email@email.com"
+        host: "{{ inventory_hostname }}"
+        password: "{{ xxxxxxxxx }}"
+        username: "{{ xxxxxxxxx }}"
