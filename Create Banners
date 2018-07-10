@@ -1,5 +1,5 @@
 ---
-- hosts: Romania-switches
+- hosts: xxxxxxxxx
   gather_facts: no
   connection: local
 
@@ -55,4 +55,3 @@
         laws.                                                                          
         *******************************************************************************
       state: present 
-[ansible@dc1netansible playbooks]$ 
