@@ -1,1 +1,1 @@
-root@dc1netansible ~]# ansible dc1-switches -m raw -a "show version" -u chase.mitchell -k | grep 'SUCCESS\|Software'
+ansible dc1-switches -m raw -a "show version" -u chase.mitchell -k | grep 'SUCCESS\|Software'
