@@ -1,5 +1,5 @@
 ---
-- hosts: Romania-switches
+- hosts: xxxxxxxxxx
   gather_facts: no
   connection: local
 
