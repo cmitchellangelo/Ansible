@@ -45,5 +45,3 @@
         - aaa accounting send stop-record authentication failure
         - aaa accounting update periodic 1
         - aaa accounting network default start-stop group xxxxxxx
-
-[ansible@dc1netansible playbooks]$ 
