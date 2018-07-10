@@ -1,4 +1,3 @@
-[ansible@dc1netansible playbooks]$ cat snmp.yml
 ---
 - connection: local
   gather_facts: false
